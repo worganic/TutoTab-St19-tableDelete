@@ -20,6 +20,7 @@ export interface Listecolumn {
   filterSelectData: any;// Filtre : liste des données du select.
   filterSelectDefault: string;// Filtre : donnée par default.
   filterSelectVide: string;// Filtre : donnée par default si données vide.
+  edit: boolean;// Edition de la colonne.
 }
 
 export interface ModelExport {
@@ -394,15 +395,58 @@ export class WorgTableComponent implements OnInit {
    * 
    * @param element 
    */
-  buttonFct(element: any){
-    const data: ModelExport = 
-      { 
-        element: element, 
-        action: "delete" 
+
+  editAff: number | undefined;
+  buttonFct(element: any, action: string){
+    var data: ModelExport = 
+    { 
+      element: element, 
+      action: action
     };
     console.log('WorgTableComponent | buttonFct / data :', data);  
-    this.action.emit(data);
-    this.majDonnees();
+    if(action == 'delete'){
+   
+      this.action.emit(data);
+      this.majDonnees();
+    }
+    if(action == 'edit'){
+      if(this.editAff != undefined){
+        this.editAff = undefined;
+      }else{
+        this.editAff = element.id;
+      }
+      console.log('WorgTableComponent | buttonFct / edit / element.id :', element.id);  
+    }
+    if(action == 'cancel'){
+      this.editAff = undefined;
+    }
+    if(action == 'editValid'){
+      console.log('WorgTableComponent | buttonFct / valid / element : ', element); 
+      // On parcour les colonnes (options) :
+      Object.entries(this.Listecolumns).forEach(([key, value], index) => {
+        // On récupère que les type edit :
+        if(value.edit){
+          const res = (<HTMLInputElement>document.getElementById(value.column)).value;
+          element[value.column] = res;
+        }
+      });
+      // On envois les nouvelles données aux services :
+      var data: ModelExport = 
+      { 
+        element: element, 
+        action: action
+      };
+      this.action.emit(data);
+      // On reviens à une ligne d'affichage normal (ss bouton).
+      this.editAff = undefined;
+      // On met à jour les données pour l'affichage.
+      this.majDonnees();
+    }
+
+  }
+
+  clickme(username: string) {
+    console.log("WorgTableComponent | clickme / username : ", username);
   }
 
   /**

@@ -43,27 +43,34 @@ export class UsersComponent implements OnInit {
   listeColumns: any[] = [
     {column: 'id', columnTitle: 'id.', type:'number', columnHidden: false, expandable: true, columnPriority:'1'},
     {column: 'username', columnTitle: 'Login', type:'string', columnHidden: false,
-      filter: true, filterType: 'text', columnPriority:'3'},
+      filter: true, filterType: 'text', columnPriority:'3',
+      edit: true},
     {column: 'firstName', columnTitle: 'Prénom', type:'string', columnHidden: false,
       filter: true, filterType: 'select', 
       filterSelectData: null, 
       filterSelectDefault: 'All', 
       filterSelectVide: 'All',
       pipe: true,
-      expandable: true, columnPriority:'2'
+      expandable: true, columnPriority:'2',
+   
     },
     {column: 'lastName', columnTitle: 'Nom', type:'string', columnHidden: false,
-      filter: true, filterType: 'text', columnPriority:'3'},
-    {column: 'date', columnTitle: 'Date', type:'string', columnHidden: false, pipe: true, columnPriority:'5'},
+      filter: true, filterType: 'text', columnPriority:'3',
+      edit: true
+    },
+    {column: 'date', columnTitle: 'Date', type:'string', columnHidden: false, pipe: true, columnPriority:'5',
+    },
     {column: 'age', columnTitle: 'Age', type:'string', columnHidden: false, columnPriority:'5'},
     {column: 'sexe', columnTitle: 'Sexe', type:'string', columnHidden: false,
       filter: true, filterType: 'select', 
       filterSelectData: ['All','Homme','Femme'], 
       filterSelectDefault: 'All', 
-      filterSelectVide: 'All', columnPriority:'5'
+      filterSelectVide: 'All', columnPriority:'5',
+      edit: true
     },
     {column: 'country', columnTitle: 'Pays', type:'string', columnHidden: true, columnPriority:'5'},
     {column: 'password', columnTitle: 'Mot de passe', type:'string', columnHidden: false, columnPriority:'5'},
+    {column: 'edit', columnTitle: 'Edit', type:'button', columnHidden: false, columnPriority:'1'},
     {column: 'delete', columnTitle: 'Delete', type:'button', columnHidden: false, columnPriority:'1'},
   ];
   
@@ -114,8 +121,12 @@ export class UsersComponent implements OnInit {
    */
   action(data: any){
     console.log("UsersComponent / action / data :", data);
-    this._usersService.delUser(data['element']);
-
+    if(data['action']== "delete"){
+      this._usersService.delUser(data['element']);
+    }
+    if(data['action']== "editValid"){
+      this._usersService.editUser(data['element']);
+    }
   }
 
 

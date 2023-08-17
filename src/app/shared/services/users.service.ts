@@ -11,14 +11,14 @@ const cacheBuster$ = new Subject<void>();
 })
 export class UsersService {
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
-  dataUser: Users[] | undefined ;
+  dataUser: Users[] | undefined;
   url: string = "http://localhost:3000/users";
 
   @Cacheable({ cacheBusterObserver: cacheBuster$, maxAge: 60 * 5 * 1000 })
   geUsers(): Observable<Users[]> {
-    
+
     //console.log("UsersService | geUsers");
     const response = this._http.get<any>(this.url);
     //console.log("UsersService | geUsers / response : ", response);
@@ -32,15 +32,38 @@ export class UsersService {
   }
 
   /**
-   * 
+   * delUser
    * @param element 
    */
   delUser(element: any) {
-    let endPoints =  element.id;
+    let endPoints = element.id;
     const url = this.url + "/" + endPoints;
     const response = this._http.delete(url).subscribe(data => {
       console.log(data);
     });
-  
+  }
+
+  /**
+ * editUser
+ * @param element 
+ */
+  editUser(element: any) {
+    let endPoints = element.id;
+    const url = this.url + "/" + endPoints;
+    const response = this._http.put(url, element).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+/**
+  * addUser
+  * @param element 
+  */
+  addUser(element: any) {
+    let endPoints = element.id;
+    const url = this.url + "/" + endPoints;
+    const response = this._http.post(url, element).subscribe(data => {
+      console.log(data);
+    });
   }
 }

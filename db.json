@@ -33,7 +33,7 @@
     },
     {
       "id": 2,
-      "username": "saran",
+      "username": "saranjjjj",
       "firstName": "sahra",
       "lastName": "Labiboche",
       "country": "england",
@@ -163,6 +163,21 @@
       "sexe": "Femme"
     },
     {
+      "username": "Obordfg",
+      "firstName": "Cardsgdfe",
+      "lastName": "Martinez",
+      "password": "987654",
+      "id": 7,
+      "age": 27,
+      "sexe": "Femme",
+      "date": [
+        {
+          "dateDeb": "2023-08-01",
+          "dateFin": "2023-08-10"
+        }
+      ]
+    },
+    {
       "username": "Ogddbor",
       "firstName": "Carogdsline",
       "lastName": "Madfgfdrtinez",
@@ -170,6 +185,36 @@
       "id": 8,
       "age": 15,
       "sexe": "Femme",
+      "date": [
+        {
+          "dateDeb": "2023-08-01",
+          "dateFin": "2023-08-10"
+        }
+      ]
+    },
+    {
+      "username": "Babar",
+      "firstName": "Caroliuoyine",
+      "lastName": "Mazearzertinez",
+      "password": "987654",
+      "id": 9,
+      "age": 5,
+      "sexe": "Homme",
+      "date": [
+        {
+          "dateDeb": "2023-08-01",
+          "dateFin": "2023-08-10"
+        }
+      ]
+    },
+    {
+      "username": "Lox",
+      "firstName": "Paul",
+      "lastName": "Andrée",
+      "password": "987654",
+      "id": 10,
+      "age": 5,
+      "sexe": "Homme",
       "date": [
         {
           "dateDeb": "2023-08-01",
